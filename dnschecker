@@ -1,0 +1,22 @@
+#!/bin/bash
+# DNSChecker
+# (c) Copyright 2014 Muhammad Panji - sumodirjo at gmail dot com
+
+if [[ $1 ]]
+then
+    address=$1;
+    for line in `cat dnslist.txt`
+    do
+        if [[ $line =~ ^# ]]
+        then
+            echo "Checking $line";
+        else
+            echo "==============";
+            echo "Checking $line";
+            dig +noall +answer $line $address;
+            echo "==============";
+        fi
+    done
+else
+   echo "Usage : dnschecker <domainname>"
+fi
